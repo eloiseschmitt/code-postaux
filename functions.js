@@ -24,6 +24,7 @@ codesPostaux.addEventListener('focusout', (event) => {
 
 let callApiForCodes = function (event) {
   //let villeInput = event.target.value;
+  // Effacer le select de villes s'il existe avant de lancer un nouvel appel
   if(document.getElementById('choixVille') != null) {
     let element = document.getElementById('choixVille');
     element.parentNode.removeChild(element);
@@ -41,6 +42,7 @@ let callApiForCodes = function (event) {
         // Si plusieurs résultats possibles, proposez de choisir la bonne ville, Affichage d'un choix multiple
       } else if (datas.length > 1) {
         codesPostaux.value = datas[0].codesPostaux[0];
+        insee.value = datas[0].code;
         text = "<select id='choixVille'>";
         datas.forEach(function (ville, index) {
           text += "<option value=" + index + ">" + ville.nom + " (" + ville.departement.code + ")</option>";
